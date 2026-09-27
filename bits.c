@@ -30,7 +30,11 @@ int bitAnd(int x, int y) {
  *   Difficulty: 1
  */
 int bitXor(int x, int y) {
-    return 2;
+    int x1 = x & y;
+    int x2 = (~x) & (~y);
+    x1 = ~x1;
+    x2 = ~x2;
+    return x1 & x2;
 }
 
 /*
