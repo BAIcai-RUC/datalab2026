@@ -54,7 +54,9 @@ int bitXor(int x, int y) {
  *   1 if x and y have the same sign , 0 otherwise.
  */
 int samesign(int x, int y) {
-    return 2;
+    if(!x) return !y;
+    if(!y) return 0;
+    return !((x^y) >> 31);
 }
 
 /*
@@ -67,7 +69,22 @@ int samesign(int x, int y) {
  *   Difficulty: 4
  */
 int logtwo(int v) {
-    return 2;
+    int r = (v>0xFFFF) << 4;
+    int s;
+    v >> r;
+
+    s = (v>0xFF) << 3;
+    r |= s;
+    v >> s;
+
+    s = (v>0xF) << 2;
+    r |= s;
+    v >> s;
+
+    s = (v>3) << 1;
+    r |= s;
+    
+    return r | (v>>1);
 }
 
 /*
