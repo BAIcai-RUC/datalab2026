@@ -71,18 +71,19 @@ int samesign(int x, int y) {
 int logtwo(int v) {
     int r = (v>0xFFFF) << 4;
     int s;
-    v >> r;
+    v >>= r;
 
     s = (v>0xFF) << 3;
     r |= s;
-    v >> s;
+    v >>= s;
 
     s = (v>0xF) << 2;
     r |= s;
-    v >> s;
+    v >>= s;
 
     s = (v>3) << 1;
     r |= s;
+    v >>= s;
     
     return r | (v>>1);
 }
@@ -97,7 +98,10 @@ int logtwo(int v) {
  *    Difficulty: 2
  */
 int byteSwap(int x, int n, int m) {
-    return 2;
+    int a = (x>>(n<<3)) & 0xFF;
+    int b = (x>>(m<<3)) & 0xFF;
+    int diff = a^b;
+    return x ^ (diff << (n<<3)) ^ (diff << (m<<3));
 }
 
 /*
