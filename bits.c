@@ -209,7 +209,17 @@ unsigned float_i2f(int x) {
  *   Difficulty: 4
  */
 unsigned floatScale2(unsigned uf) {
-    return 2;
+    unsigned s = uf & 0x80000000;
+    unsigned e = (uf>>23) & 0xFF;
+    unsigned f = uf & 0x7FFFFF;
+
+    if(e == 255) return uf;
+    if(e == 0) return s | (f<<1);
+    e++;
+    if(e == 255)
+        return s | 0x7F800000;
+
+    return s | (e<<23) | f;
 }
 
 /*
