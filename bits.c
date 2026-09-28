@@ -113,7 +113,14 @@ int byteSwap(int x, int n, int m) {
  *   Difficulty: 3
  */
 unsigned reverse(unsigned v) {
-    return 2;
+    unsigned a=0u;
+    int i = 32;
+    while(i){
+        a = (a<<1)|(v&1u);
+        v>>=1;
+        i--;
+    }
+    return a;
 }
 
 /*
@@ -125,7 +132,7 @@ unsigned reverse(unsigned v) {
  *   Difficulty: 3
  */
 int logicalShift(int x, int n) {
-    return 2;
+    int a = x >> n;
 }
 
 /*
