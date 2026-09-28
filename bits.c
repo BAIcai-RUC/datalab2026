@@ -181,7 +181,20 @@ int leftBitCount(int x) {
  *   Difficulty: 4
  */
 unsigned float_i2f(int x) {
-    return 2;
+    if(x==0) return 0;
+    unsigned s = x & (1u<<31);
+    if (s){
+        x = ~x + 1;
+    }
+    int e = 158; //阶数
+    while(!(x&(1u<<31))){
+        x <<= 1;
+        e--;
+    }
+    unsigned f = (x & 0x7FFFFFFF) >> 8;
+    unsigned tail = x & 0xFF;
+    if((tail>0x80) | ((tail == 0x80) & (f&1))) f = f + 1;
+    return s + (e << 23) + f;
 }
 
 /*
