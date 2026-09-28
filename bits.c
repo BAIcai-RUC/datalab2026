@@ -132,7 +132,11 @@ unsigned reverse(unsigned v) {
  *   Difficulty: 3
  */
 int logicalShift(int x, int n) {
-    int a = x >> n;
+    int b = 1 << 31;
+    int a = !!(x&b);
+    x = (x&~b) >> n;
+    a = a << (31 + (~n + 1));
+    return x|a;
 }
 
 /*
